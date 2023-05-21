@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class ThemeParkSupabaseUser extends BaseAuthUser {
-  ThemeParkSupabaseUser(this.user);
+class AdventurekingdomSupabaseUser extends BaseAuthUser {
+  AdventurekingdomSupabaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -42,7 +42,7 @@ class ThemeParkSupabaseUser extends BaseAuthUser {
 /// [SupaFlow.client.auth.onAuthStateChange] does not yield any values until the
 /// user is already authenticated. So we add a default null user to the stream,
 /// if we need to interact with the [currentUser] before logging in.
-Stream<BaseAuthUser> themeParkSupabaseUserStream() {
+Stream<BaseAuthUser> adventurekingdomSupabaseUserStream() {
   final supabaseAuthStream = SupaFlow.client.auth.onAuthStateChange.debounce(
       (authState) => authState.event == AuthChangeEvent.tokenRefreshed
           ? TimerStream(authState, Duration(seconds: 1))
@@ -52,7 +52,7 @@ Stream<BaseAuthUser> themeParkSupabaseUserStream() {
           : supabaseAuthStream)
       .map<BaseAuthUser>(
     (authState) {
-      currentUser = ThemeParkSupabaseUser(authState?.session?.user);
+      currentUser = AdventurekingdomSupabaseUser(authState?.session?.user);
       return currentUser!;
     },
   );
